@@ -11,7 +11,9 @@ User `Ctrl+Shift+P` to open the VS-Code command palette with an editor open, the
 ### Insert Horizontal Line: 
 Adds a single line comment of a specified length.
 
-`# ----------------------`
+```
+# ----------------------
+```
 
 ### Insert Dual Horizontal Line Block Comment: 
 
