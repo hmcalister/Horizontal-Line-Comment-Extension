@@ -1,7 +1,7 @@
 {
   "name": "horizontal-line-comment",
   "displayName": "Horizontal Line Comment",
-  "description": "",
+  "description": "Insert horizontal line comments into source code files.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.63.0"
