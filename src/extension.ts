@@ -32,19 +32,19 @@ function performSetup(editor: vscode.TextEditor): [string, number, number] {
 
 function getCommentSyntax(languageId: string): string | null {
 	const commentSyntaxMap: { [key: string]: string } = {
-		"javascript": "// ",
-		"typescript": "// ",
-		"python": "# ",
-		"cpp": "// ",
-		"c": "// ",
-		"java": "// ",
-		"csharp": "// ",
-		"rust": "// ",
-		"ruby": "# ",
-		"php": "// ",
 		"go": "// ",
+		"python": "# ",
+		"c": "// ",
+		"cpp": "// ",
+		"rust": "// ",
 		"shellscript": "# ",
 		"fortran": "! ",
+		"javascript": "// ",
+		"typescript": "// ",
+		"java": "// ",
+		"csharp": "// ",
+		"ruby": "# ",
+		"php": "// ",
 	};
 
 	return commentSyntaxMap[languageId] || null;
