@@ -2,10 +2,24 @@ import * as vscode from "vscode";
 
 export function activate(context: vscode.ExtensionContext) {
 
+	const insertHorizontalLine = vscode.commands.registerCommand("horizontal-line-comment.insertHorizontalLine", () => {
+		let editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return;
+		}
+		let [commentSyntax, commentLength, lineNumber] = performSetup(editor);
+
+		editor.edit(editBuilder => {
+			editBuilder.insert(new vscode.Position(lineNumber, 0), commentSyntax + "-".repeat(commentLength) + "\n");
+		}).then(() => {
+			const newPosition = new vscode.Position(lineNumber + 1, 0);
+			editor.selection = new vscode.Selection(newPosition, newPosition);
+		});
+	});
 
 
 
-
+	context.subscriptions.push(insertHorizontalLine);
 }
 
 export function deactivate() { }
