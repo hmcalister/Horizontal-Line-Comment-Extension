@@ -17,9 +17,24 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	const insertDualHorizontalLineBlock = vscode.commands.registerCommand("horizontal-line-comment.insertDualHorizontalLineBlock", () => {
+		let editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return;
+		}
+		let [commentSyntax, commentLength, lineNumber] = performSetup(editor);
 
+		const horizontalLine = commentSyntax + "-".repeat(commentLength);
+		editor.edit(editBuilder => {
+			editBuilder.insert(new vscode.Position(lineNumber, 0), horizontalLine + "\n" + commentSyntax + "\n" + horizontalLine + "\n");
+		}).then(() => {
+			const newPosition = new vscode.Position(lineNumber + 1, commentSyntax.length);
+			editor.selection = new vscode.Selection(newPosition, newPosition);
+		});
+	});
 
 	context.subscriptions.push(insertHorizontalLine);
+	context.subscriptions.push(insertDualHorizontalLineBlock);
 }
 
 export function deactivate() { }
