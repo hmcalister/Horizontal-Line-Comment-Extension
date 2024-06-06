@@ -22,6 +22,16 @@
         "title": "Insert Dual Horizontal Line Block Comment"
       }
     ],
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "horizontal-line-comment.horizontalLineLength": {
+          "type": "number",
+          "default": 80,
+          "description": "The number of hyphens to add after the comment syntax."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
