@@ -46,35 +46,17 @@ function performSetup(editor: vscode.TextEditor): [string, number, number] {
 	let document = editor.document;
 	let selection = editor.selection;
 	let line = document.lineAt(selection.active.line);
+
+	const config = vscode.workspace.getConfiguration("horizontal-line-comment");
+	const horizontalLineLength = config.get<number>('horizontalLineLength', 80);
+
+	const commentSyntaxMap = config.get<{ [key: string]: string }>('commentSyntaxMap', {});
 	let languageId = document.languageId;
-	let commentSyntax = getCommentSyntax(languageId);
+	let commentSyntax = commentSyntaxMap[languageId];
 	if (!commentSyntax) {
-		vscode.window.showInformationMessage(`No comment syntax found for language: ${languageId}`);
+		vscode.window.showInformationMessage(`No comment syntax found for language: ${languageId}. Add one under preferences > horizontal-line-comment > commentSyntaxMap.`);
 		commentSyntax = "";
 	}
 
-	const config = vscode.workspace.getConfiguration("horizontal-line-comment");
-	const horizontalLineLength = config.get<number>('horizontalLineLength', 3);
-
 	return [commentSyntax, horizontalLineLength, line.lineNumber];
-}
-
-function getCommentSyntax(languageId: string): string | null {
-	const commentSyntaxMap: { [key: string]: string } = {
-		"go": "// ",
-		"python": "# ",
-		"c": "// ",
-		"cpp": "// ",
-		"rust": "// ",
-		"shellscript": "# ",
-		"fortran": "! ",
-		"javascript": "// ",
-		"typescript": "// ",
-		"java": "// ",
-		"csharp": "// ",
-		"ruby": "# ",
-		"php": "// ",
-	};
-
-	return commentSyntaxMap[languageId] || null;
 }
