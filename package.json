@@ -14,8 +14,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "horizontal-line-comment.helloWorld",
-        "title": "Hello World"
       }
     ]
   },
