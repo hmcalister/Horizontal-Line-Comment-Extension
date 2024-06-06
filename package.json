@@ -2,6 +2,7 @@
   "name": "horizontal-line-comment",
   "displayName": "Horizontal Line Comment",
   "description": "Insert horizontal line comments into source code files.",
+  "publisher": "hmcalister",
   "repository": {
     "type": "git",
     "url": "github:hmcalister/Horizontal-Line-Comment-Extension"
