@@ -14,8 +14,14 @@
   "contributes": {
     "commands": [
       {
+        "command": "horizontal-line-comment.insertHorizontalLine",
+        "title": "Insert Horizontal Line"
+      },
+      {
+        "command": "horizontal-line-comment.insertDualHorizontalLineBlock",
+        "title": "Insert Dual Horizontal Line Block Comment"
       }
-    ]
+    ],
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
