@@ -29,6 +29,25 @@
           "type": "number",
           "default": 80,
           "description": "The number of hyphens to add after the comment syntax."
+        },
+        "horizontal-line-comment.commentSyntaxMap": {
+          "type": "object",
+          "default": {
+            "go": "// ",
+            "python": "# ",
+            "c": "// ",
+            "cpp": "// ",
+            "rust": "// ",
+            "shellscript": "# ",
+            "fortran": "! ",
+            "javascript": "// ",
+            "typescript": "// ",
+            "java": "// ",
+            "csharp": "// ",
+            "ruby": "# ",
+            "php": "// "
+          },
+          "description": "A map from language ID to the comment syntax of that language. Used to start the line of each comment."
         }
       }
     }
