@@ -7,10 +7,10 @@ export function activate(context: vscode.ExtensionContext) {
 		if (!editor) {
 			return;
 		}
-		let [commentSyntax, commentLength, lineNumber] = performSetup(editor);
+		let [commentSyntax, horizontalLineSymbol, commentLength, lineNumber] = performSetup(editor);
 
 		editor.edit(editBuilder => {
-			editBuilder.insert(new vscode.Position(lineNumber, 0), commentSyntax + "-".repeat(commentLength) + "\n");
+			editBuilder.insert(new vscode.Position(lineNumber, 0), commentSyntax + horizontalLineSymbol.repeat(commentLength) + "\n");
 		}).then(() => {
 			const newPosition = new vscode.Position(lineNumber + 1, 0);
 			editor.selection = new vscode.Selection(newPosition, newPosition);
@@ -22,9 +22,9 @@ export function activate(context: vscode.ExtensionContext) {
 		if (!editor) {
 			return;
 		}
-		let [commentSyntax, commentLength, lineNumber] = performSetup(editor);
+		let [commentSyntax, horizontalLineSymbol, commentLength, lineNumber] = performSetup(editor);
 
-		const horizontalLine = commentSyntax + "-".repeat(commentLength);
+		const horizontalLine = commentSyntax + horizontalLineSymbol.repeat(commentLength);
 		editor.edit(editBuilder => {
 			editBuilder.insert(new vscode.Position(lineNumber, 0), horizontalLine + "\n" + commentSyntax + "\n" + horizontalLine + "\n");
 		}).then(() => {
@@ -41,13 +41,14 @@ export function deactivate() { }
 
 // Setup the functionality to insert a comment.
 // 
-// Returns the comment syntax, the number of hyphens to insert, and the line number.
-function performSetup(editor: vscode.TextEditor): [string, number, number] {
+// Returns the comment syntax, the horizontal line symbol, the number of symbols to insert, and the line number.
+function performSetup(editor: vscode.TextEditor): [string, string, number, number] {
 	let document = editor.document;
 	let selection = editor.selection;
 	let line = document.lineAt(selection.active.line);
 
 	const config = vscode.workspace.getConfiguration("horizontal-line-comment");
+	const horizontalLineSymbol = config.get<string>('horizontalLineSymbol', "-");
 	const horizontalLineLength = config.get<number>('horizontalLineLength', 80);
 
 	const commentSyntaxMap = config.get<{ [key: string]: string }>('commentSyntaxMap', {});
@@ -58,5 +59,5 @@ function performSetup(editor: vscode.TextEditor): [string, number, number] {
 		commentSyntax = "";
 	}
 
-	return [commentSyntax, horizontalLineLength, line.lineNumber];
+	return [commentSyntax, horizontalLineSymbol, horizontalLineLength, line.lineNumber];
 }
