@@ -25,6 +25,11 @@
     "configuration": {
       "type": "object",
       "properties": {
+        "horizontal-line-comment.horizontalLineSymbol": {
+          "type": "string",
+          "default": "-",
+          "description": "The symbol to use for the horizontal line comment."
+        },
         "horizontal-line-comment.horizontalLineLength": {
           "type": "number",
           "default": 80,
