@@ -6,6 +6,8 @@ Allows preferences for the comment symbol, the line length, and setting your own
 
 ## Commands
 
+User `Ctrl+P` to open the VS-Code command palette with an editor open, then search for any of the following commands:
+
 ### Insert Horizontal Line: 
 Adds a single line comment of a specified length.
 
